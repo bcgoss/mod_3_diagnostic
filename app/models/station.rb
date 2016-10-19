@@ -5,10 +5,6 @@ class Station
               :distance,
               :access_time
   def self.find_by_zip(postal_code)
-    attributes_list = []
-    attributes_list.map do |attributes|
-      Station.new(attributes)
-    end
     attributes = {
       name: 'Hyatt Regency Denver',
       address: '650 15th St Denver CO 80202',
@@ -16,7 +12,10 @@ class Station
       distance: 1.03475,
       access_time: '24 hours daily'
     }
-    [Station.new(attributes), Station.new(attributes)]
+    attributes_list = StationService.find_by_zip(postal_code)
+    attributes_list.map do |attrs|
+      Station.new(attrs)
+    end
   end
   
   def initialize(attributes)
